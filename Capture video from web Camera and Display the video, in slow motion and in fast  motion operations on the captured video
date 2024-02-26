@@ -1,0 +1,32 @@
+from google.colab import files
+from google.colab.patches import cv2_imshow
+import cv2
+
+# Upload the video file to Colab
+uploaded = files.upload()
+
+# Assuming you uploaded a single video file, get its file name
+video_filename = next(iter(uploaded))
+
+# Create a VideoCapture object
+cap = cv2.VideoCapture(video_filename)
+
+# Check if the video was opened successfully
+if not cap.isOpened():
+    print("Error: Could not open video.")
+else:
+    # Read and display the video frames
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            print("Reached the end of the video or an error occurred.")
+            break
+
+        # Display the frame
+        cv2_imshow(frame)
+
+        # Wait for a short period of time. If you want to slow down the video, increase the number.
+        cv2.waitKey(25)  # Use a small delay to make the video playback at a reasonable speed.
+
+# When everything is done, release the VideoCapture object
+cap.release()
