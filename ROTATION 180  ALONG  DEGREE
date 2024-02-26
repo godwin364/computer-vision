@@ -1,0 +1,9 @@
+import cv2
+from google.colab.patches import cv2_imshow
+
+path = "/content/naturee.jfif"
+src = cv2.imread(path)
+window_name = 'Image'
+image = cv2.rotate(src, cv2.ROTATE_180)
+cv2_imshow(image)
+cv2.waitKey(0)
